@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
        SpecificationLexicale specificationLexicale = new SpecificationLexicale();
         try {
-            String s = specificationLexicale.remplacer(new File("src/programmesAnnexes/Exemple4"));
+            String s = specificationLexicale.remplacer(new File("src/programmesAnnexes/Exemple2"));
             System.out.println(s);
         } catch (FileNotFoundException e) {
             System.out.println("fichier non trouvé");

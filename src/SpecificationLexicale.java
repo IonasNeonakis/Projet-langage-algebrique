@@ -109,7 +109,7 @@ public class SpecificationLexicale {
                 }
             }
         }
-        return remplacement.toString().trim();
+        return remplacement.toString().trim().replaceAll(" ; ",";");
     }
 
 
