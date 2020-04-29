@@ -4,4 +4,4 @@ begin
     for i from 2 to n do
         r <- r * i
     end
-end
+end.

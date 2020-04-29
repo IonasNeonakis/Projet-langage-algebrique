@@ -5,4 +5,4 @@ begin
     while y > 0 do
         z <- z*t[i]
     end
-end
+end.
