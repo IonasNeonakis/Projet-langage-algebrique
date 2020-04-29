@@ -8,7 +8,7 @@ public class NoeudAutomate {
     private int numeroEtat;
     private NoeudAutomate[] transition; // sont les transitions possible à partir de cet état
 
-    private static int LONGUEUR_ALPHABET = 26 + 10 ; // longueur alphabet =  [a - z] + [0-9]
+    private static int LONGUEUR_ALPHABET = 26 + 10 + 1 ; // longueur alphabet =  [a - z] + [0-9] + "-"
 
     /**
      * Création d'un noeud avec un nombre de transition égal à la longueu de l'alphabet : ici 36
@@ -26,7 +26,7 @@ public class NoeudAutomate {
      * @param n est l'état d'arrivé
      * @param s est le ou les caractères de transition
      */
-    public void ajouterTransition(NoeudAutomate n, String... s){ // on stock les lettre de 0 a 25 et les chiffres de 26 à 35
+    public void ajouterTransition(NoeudAutomate n, String... s){ // on stock les lettre de 0 a 25 et les chiffres de 26 à 35 et le "-" en 36
         for (String s1: s) {
             if (s1.length() != 1) {
                 throw new RuntimeException("S doit être de longueur 1");
@@ -34,7 +34,11 @@ public class NoeudAutomate {
             int codeAsci = s1.codePointAt(0);
 
             if ((codeAsci < 48 || codeAsci > 57) && (codeAsci < 97 || codeAsci > 122)) {
-                throw new RuntimeException("la lettre doit être entre [a-z] et [0-9]");
+                throw new RuntimeException("la lettre doit être entre [a-z], [0-9] et -");
+            }
+
+            if(s1.equals("-")){
+                this.transition[36] = n;
             }
 
             if (codeAsci >= 97) { // si c'est une lettre
@@ -70,6 +74,11 @@ public class NoeudAutomate {
         if (s.length() != 1){
             throw new RuntimeException("S doit être de longueur 1");
         }
+
+        if (s.equals("-")){
+            return this.transition[36];
+        }
+
         int codeAsci = s.codePointAt(0);
 
         if(( codeAsci < 48 || codeAsci > 57) && ( codeAsci < 97 || codeAsci > 122)){

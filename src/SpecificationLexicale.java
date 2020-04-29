@@ -65,7 +65,6 @@ public class SpecificationLexicale {
      * Constructeur qui crée les deux automates
      */
     public SpecificationLexicale() {
-        listMotCLes.add("program");
         NoeudAutomate a1n1 = new NoeudAutomate(false,1);
         NoeudAutomate a1n2 = new NoeudAutomate(true,2);
         NoeudAutomate a1n3 = new NoeudAutomate(true,3);
