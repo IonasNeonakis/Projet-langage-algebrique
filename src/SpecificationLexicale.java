@@ -68,18 +68,24 @@ public class SpecificationLexicale {
         NoeudAutomate a1n1 = new NoeudAutomate(false,1);
         NoeudAutomate a1n2 = new NoeudAutomate(true,2);
         NoeudAutomate a1n3 = new NoeudAutomate(true,3);
+        NoeudAutomate a1n4 = new NoeudAutomate(true,4);
 
         a1n1.ajouterTransition(a1n2,"0");
 
-        a1n1.ajouterTransition(a1n3,"1","2","3","4","5","6","7","8","9");
+        a1n1.ajouterTransition(a1n3,"-");
 
-        a1n3.ajouterNombres(a1n3);
 
-        this.automateEntiers =  new Automate(3,a1n1);
+        a1n3.ajouterTransition(a1n4,"1","2","3","4","5","6","7","8","9");
+        a1n1.ajouterTransition(a1n4,"1","2","3","4","5","6","7","8","9");
+
+        a1n4.ajouterNombres(a1n4);
+
+        this.automateEntiers =  new Automate(4,a1n1);
 
         this.automateEntiers.ajouterEtat(a1n1,0);
         this.automateEntiers.ajouterEtat(a1n2,1);
         this.automateEntiers.ajouterEtat(a1n3,2);
+        this.automateEntiers.ajouterEtat(a1n4,3);
 
 
         NoeudAutomate a2n1 = new NoeudAutomate(false,1);

@@ -31,20 +31,22 @@ public class NoeudAutomate {
             if (s1.length() != 1) {
                 throw new RuntimeException("S doit être de longueur 1");
             }
-            int codeAsci = s1.codePointAt(0);
 
-            if ((codeAsci < 48 || codeAsci > 57) && (codeAsci < 97 || codeAsci > 122)) {
-                throw new RuntimeException("la lettre doit être entre [a-z], [0-9] et -");
-            }
-
-            if(s1.equals("-")){
+            if (s1.equals("-")) {
                 this.transition[36] = n;
-            }
+            } else {
+                int codeAsci = s1.codePointAt(0);
 
-            if (codeAsci >= 97) { // si c'est une lettre
-                this.transition[codeAsci - 97] = n;
-            } else // si c'est un chiffre
-                this.transition[codeAsci - 48 + 26] = n;
+                if ((codeAsci < 48 || codeAsci > 57) && (codeAsci < 97 || codeAsci > 122)) {
+                    throw new RuntimeException("la lettre doit être entre [a-z], [0-9] et -");
+                }
+
+
+                if (codeAsci >= 97) { // si c'est une lettre
+                    this.transition[codeAsci - 97] = n;
+                } else // si c'est un chiffre
+                    this.transition[codeAsci - 48 + 26] = n;
+            }
         }
     }
 
@@ -70,25 +72,26 @@ public class NoeudAutomate {
      * @param s est le mot passé en paramètres
      * @return le nouvel état ou null si la transition n'existe pas
      */
-    public NoeudAutomate getTransition(String s){
-        if (s.length() != 1){
+    public NoeudAutomate getTransition(String s) {
+        if (s.length() != 1) {
             throw new RuntimeException("S doit être de longueur 1");
         }
 
-        if (s.equals("-")){
+        if (s.equals("-")) {
             return this.transition[36];
+        } else {
+
+            int codeAsci = s.codePointAt(0);
+
+            if ((codeAsci < 48 || codeAsci > 57) && (codeAsci < 97 || codeAsci > 122)) {
+                throw new RuntimeException("la lettre doit être entre [a-z] et [0-9]");
+            }
+
+            if (codeAsci >= 97) { // si c'est une lettre
+                return this.transition[codeAsci - 97];
+            } else // si c'est un chiffre
+                return this.transition[codeAsci - 48 + 26];
         }
-
-        int codeAsci = s.codePointAt(0);
-
-        if(( codeAsci < 48 || codeAsci > 57) && ( codeAsci < 97 || codeAsci > 122)){
-            throw new RuntimeException("la lettre doit être entre [a-z] et [0-9]");
-        }
-
-        if (codeAsci >= 97){ // si c'est une lettre
-            return this.transition[codeAsci - 97];
-        }else // si c'est un chiffre
-            return this.transition[codeAsci - 48 + 26];
     }
 
 
