@@ -34,8 +34,8 @@ public class Automate {
      * @return true ou false
      */
     public boolean estValide(String mot){
-        NoeudAutomate noeudAutomateActuel = this.etatInitial ;
-        for (int i = 0; i < mot.length() ; i++) {
+        NoeudAutomate noeudAutomateActuel = this.etatInitial;
+        for (int i = 0; i < mot.length(); i++) {
             String lettreActuelle = String.valueOf(mot.charAt(i));
             int codeAsci = lettreActuelle.codePointAt(0);
             if(( codeAsci < 48 || codeAsci > 57) && ( codeAsci < 97 || codeAsci > 122)) // si le caractere n'est pas dans le langage alors on retourne faux

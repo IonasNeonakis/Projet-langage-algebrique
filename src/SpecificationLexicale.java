@@ -67,13 +67,12 @@ public class SpecificationLexicale {
     public SpecificationLexicale() {
         NoeudAutomate a1n1 = new NoeudAutomate(false,1);
         NoeudAutomate a1n2 = new NoeudAutomate(true,2);
-        NoeudAutomate a1n3 = new NoeudAutomate(true,3);
+        NoeudAutomate a1n3 = new NoeudAutomate(false,3);
         NoeudAutomate a1n4 = new NoeudAutomate(true,4);
 
         a1n1.ajouterTransition(a1n2,"0");
 
         a1n1.ajouterTransition(a1n3,"-");
-
 
         a1n3.ajouterTransition(a1n4,"1","2","3","4","5","6","7","8","9");
         a1n1.ajouterTransition(a1n4,"1","2","3","4","5","6","7","8","9");
@@ -141,6 +140,8 @@ public class SpecificationLexicale {
 
                 } else if (this.caracteresSpeciaux.contains(mot)) { // si c'est un caractère spécial on le laisse tel quel sans espace devant
                     remplacement.append(mot);
+                }else if (!mot.equals("")){
+                    throw new RuntimeException("Faute de langage :\""+ mot +"\" n'est pas de l'alphabet");
                 }
             }
         }
