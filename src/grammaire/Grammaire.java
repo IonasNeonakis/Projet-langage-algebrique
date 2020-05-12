@@ -64,4 +64,26 @@ public class Grammaire {
         }
         return s.toString().toString();
     }
+
+    public boolean isEpsilon(String s){
+        return s.equals("ε");
+    }
+
+    public Map<String,List<String>> calculerPremiers(){
+        Map <String,List<String>> premiers = new HashMap<>();
+        for (Map.Entry<String,List<String>> entry : this.reglesProduction.entrySet()){
+            List<String> lesPremiers = new ArrayList<>();
+            for (String uneProd: entry.getValue()) {
+                String[] mots = uneProd.split(" ");
+                if (this.nonTerminaux.contains(mots[0]) || this.isEpsilon(mots[0])){
+                    lesPremiers.add(mots[0]);
+                }
+                if (this.terminaux.contains(mots[0])){
+
+                }
+
+                premiers.put(entry.getKey(),lesPremiers);
+            }
+        }
+    }
 }
