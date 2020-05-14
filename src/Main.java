@@ -18,7 +18,7 @@ public class Main {
             specificationSyntaxique.afficherPremiers();
             specificationSyntaxique.afficherSuivants();
             specificationSyntaxique.calculerTableProduction();
-            specificationSyntaxique.affihcerTableProduction();
+            specificationSyntaxique.afficherTableProduction();
             //System.out.println(specificationSyntaxique.analyserTexte(s));
             //g.analyseChaine("s");
         } catch (FileNotFoundException e) {

@@ -2,6 +2,9 @@ import grammaire.Grammaire;
 
 import java.util.Arrays;
 
+/**
+ * Classe de la partie specification syntaxique qui contient la grammaire G'
+ */
 public class SpecificationSyntaxique {
 
     private Grammaire g;
@@ -86,10 +89,16 @@ public class SpecificationSyntaxique {
 
     }
 
+    /**
+     * Calcule les premiers
+     */
     public void calculerPremiers(){
         this.g.calculerTousLesPremiers();
     }
 
+    /**
+     * Calcule les suicants
+     */
     public void calculerSuivants(){
         this.g.calculerTousSuivant();
     }
@@ -102,29 +111,29 @@ public class SpecificationSyntaxique {
         this.g.afficherSuivant();
     }
 
+    /**
+     * calcule la table de production
+     */
     public void calculerTableProduction(){
         this.g.construireTable();
     }
 
-    public void affihcerTableProduction(){
+    public void afficherTableProduction(){
         this.g.afficherTableProduction();
     }
 
+    /**
+     * Méthode qui analyse le texte à partir de la table de production
+     * @param s est la chaine a analyée
+     * @return true si le texte est correcte, false sinon
+     */
     public boolean analyserTexte(String s){
         g.calculerTousSuivant();
         return g.analyseChaine(s);
     }
 
 
-
-
-
-    public Grammaire getG() {
-        return g;
-    }
-
-    @Override
-    public String toString() {
-        return g.toString();
+    public void afficherGrammaire() {
+        System.out.println(g.toString());
     }
 }
