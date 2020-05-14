@@ -2,6 +2,8 @@
  
  Pour lancer le projet il suffit de lancer le main et de suivre les instructions
  
+ L'éxécutable est celui-là :  out/artifacts/Projet_langage_algebrique_jar/Projet-langage-algebrique.jar
+ 
  
 #Choix de développement
 
