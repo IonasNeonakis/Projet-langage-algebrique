@@ -1,6 +1,9 @@
 import grammaire.Grammaire;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * Classe de la partie specification syntaxique qui contient la grammaire G'
@@ -9,10 +12,49 @@ public class SpecificationSyntaxique {
 
     private Grammaire g;
 
+    public void lireGrammaire(File file) throws FileNotFoundException {
+        this.g = new Grammaire();
+        Scanner scFile = new Scanner(file);
+        String ligne;
+        String premiereLigne = scFile.nextLine();
+        this.enregisterPremiereLigneAxiome(premiereLigne);
+        while (scFile.hasNextLine()) {
+            ligne = scFile.nextLine();
+            enregisterLigne(ligne);
+        }
+    }
+
+    public void enregisterPremiereLigneAxiome(String premiereLigne){
+        String NtS= premiereLigne.split("->")[0].trim();
+        g.definirAxiomeS(NtS);
+        enregisterLigne(premiereLigne);
+    }
+
+    public void enregisterLigne(String ligne){
+        String[] splitted = ligne.split("->");
+        String nonTerminal = splitted[0].trim();
+        g.ajouterNonTerminal(nonTerminal);
+        String[] productions = splitted[1].split("\\|");
+        for (String production : productions) {
+            production = production.trim();
+            String[] mot = production.split(" ");
+            for (String s : mot) {
+                if (Character.isUpperCase(s.charAt(0))){ // si c'est une minuscule
+                    g.ajouterNonTerminal(s);
+                }else {
+                    g.ajouterTerminal(s);
+                }
+            }
+            g.ajouterRegleProduction(nonTerminal,production);
+        }
+    }
+
 
     public SpecificationSyntaxique() {
         this.g = new Grammaire();
+    }
 
+    public void loadGPrim(){
         g.ajouterNonTerminal("S","LI","LI'","I","Affectation","Affectation'","While","For","If","ValBool",
                 "BExpression","BExpression'","TBExpression","TBExpression'","FBExpression","GBExpression",
                 "Expression","Expression'","TExpression","TExpression'","FExpression","OpPrio","OpPasPrio",
@@ -25,7 +67,7 @@ public class SpecificationSyntaxique {
         g.ajouterRegleProduction("S","program ident begin LI end.");
         g.ajouterRegleProduction("LI","I LI'");
         g.ajouterRegleProduction("LI'","; LI");
-        g.ajouterRegleProduction("LI'","ε"); // epsilon ici
+        g.ajouterRegleProduction("LI'","ε");
 
         g.ajouterRegleProduction("I","Affectation");
         g.ajouterRegleProduction("I","While");
@@ -87,6 +129,10 @@ public class SpecificationSyntaxique {
 
         g.definirAxiomeS("S");
 
+        this.calculerPremiers();
+        this.calculerSuivants();
+        this.calculerTableProduction();
+
     }
 
     /**
@@ -135,5 +181,13 @@ public class SpecificationSyntaxique {
 
     public void afficherGrammaire() {
         System.out.println(g.toString());
+    }
+
+    public void afficherNonTerminaux(){
+        g.afficherNonTerminaux();
+    }
+
+    public void afficherTerminaux() {
+        g.afficherTerminaux();
     }
 }

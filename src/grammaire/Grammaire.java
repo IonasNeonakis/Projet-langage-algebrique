@@ -11,7 +11,6 @@ public class Grammaire {
     private Set<String> terminaux;
 
     private String nonTerminalS;
-    private List<String> terminauxS;
 
     private Map<String, Set<String>> premiers;
     private Map<String, Set<String>> suivants;
@@ -82,7 +81,6 @@ public class Grammaire {
      */
     public void definirAxiomeS(String s) {
         this.nonTerminalS = s;
-        this.terminauxS = this.reglesProduction.get(s);
     }
 
     /**
