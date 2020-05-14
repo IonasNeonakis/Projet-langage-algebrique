@@ -16,7 +16,8 @@ public class Main {
             g.calculerTousLesPremiers();
             //g.afficherPremiers();
             g.calculerTousSuivant();
-            g.afficherSuivant();
+            g.construireTable();
+            g.afficherTableProduction();
         } catch (FileNotFoundException e) {
             System.out.println("fichier non trouvé");
         }

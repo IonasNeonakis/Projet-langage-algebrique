@@ -13,7 +13,7 @@ public class Grammaire {
     private Map<String, Set<String>> premiers;
     private Map<String, Set<String>> suivants;
 
-    private String[][] tableAnalyse;
+    private Map<String,Map<String,String>> tableAnalyse;
 
 
 
@@ -24,7 +24,7 @@ public class Grammaire {
         this.terminaux = new HashSet<>();
         this.premiers = new HashMap<>();
         this.suivants = new HashMap<>();
-
+        this.tableAnalyse = new HashMap<>();
     }
 
     public void loadSuivants(){
@@ -200,6 +200,41 @@ public class Grammaire {
             s.append(entry.getKey()).append(" : ").append(entry.getValue().toString()).append("\n");
         }
         System.out.println(s);
+    }
+
+    public void construireTable(){
+        for (Map.Entry<String, List<String>> entry : this.reglesProduction.entrySet()) {
+            String gA = entry.getKey();
+            for (String alpha : entry.getValue()) {
+                Set<String> tousa = this.premiersRecUnSeul(gA, alpha);
+                for (String a : tousa) {
+                    Map<String, String> t2;
+                    if (!this.tableAnalyse.containsKey(gA)) {
+                        t2 = new HashMap<>();
+                    }else{
+                        t2 = this.tableAnalyse.get(gA);
+                    }
+                    t2.put(a, alpha);
+                    this.tableAnalyse.put(gA, t2);
+                }
+                if (tousa.contains("ε")){
+                    for (String b : this.suivants.get(gA)) {
+                        Map<String, String> t2;
+                        if (!this.tableAnalyse.containsKey(gA)) {
+                            t2 = new HashMap<>();
+                        }else{
+                            t2 = this.tableAnalyse.get(gA);
+                        }
+                        t2.put(b,alpha);
+                        this.tableAnalyse.put(gA,t2);
+                    }
+                }
+            }
+        }
+    }
+
+    public void afficherTableProduction(){
+        System.out.println(this.tableAnalyse.toString());
     }
 
 
