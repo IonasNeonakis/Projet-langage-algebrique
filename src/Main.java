@@ -13,15 +13,13 @@ public class Main {
             String s = specificationLexicale.remplacer(new File("src/programmesAnnexes/Exemple6"));
             System.out.println(s);
             SpecificationSyntaxique specificationSyntaxique= new SpecificationSyntaxique();
-            Grammaire g = specificationSyntaxique.getG();
-            g.calculerTousLesPremiers();
-            //g.afficherPremiers();
-            g.calculerTousSuivant();
-            //g.afficherSuivant();
-            g.construireTable();
-            //g.afficherTableProduction();
-            //g.afficherTableProduction();
-            System.out.println(g.analyseChaine(s));
+            specificationSyntaxique.calculerPremiers();
+            specificationSyntaxique.calculerSuivants();
+            specificationSyntaxique.afficherPremiers();
+            specificationSyntaxique.afficherSuivants();
+            specificationSyntaxique.calculerTableProduction();
+            specificationSyntaxique.affihcerTableProduction();
+            //System.out.println(specificationSyntaxique.analyserTexte(s));
             //g.analyseChaine("s");
         } catch (FileNotFoundException e) {
             System.out.println("fichier non trouvé");

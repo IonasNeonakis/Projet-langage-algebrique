@@ -86,6 +86,39 @@ public class SpecificationSyntaxique {
 
     }
 
+    public void calculerPremiers(){
+        this.g.calculerTousLesPremiers();
+    }
+
+    public void calculerSuivants(){
+        this.g.calculerTousSuivant();
+    }
+
+    public void afficherPremiers(){
+        this.g.afficherPremiers();
+    }
+
+    public void afficherSuivants(){
+        this.g.afficherSuivant();
+    }
+
+    public void calculerTableProduction(){
+        this.g.construireTable();
+    }
+
+    public void affihcerTableProduction(){
+        this.g.afficherTableProduction();
+    }
+
+    public boolean analyserTexte(String s){
+        g.calculerTousSuivant();
+        return g.analyseChaine(s);
+    }
+
+
+
+
+
     public Grammaire getG() {
         return g;
     }
