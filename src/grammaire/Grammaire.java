@@ -114,7 +114,7 @@ public class Grammaire {
      * @param fg est tout ce qui se trouve à gauche de la fleche, autrement dit un non terminal
      * @return les premiers calculés
      */
-    public Set<String> calculerTousLesPremiers(String fg) {
+    private Set<String> calculerTousLesPremiers(String fg) {
         List<String> reglesProd = this.reglesProduction.get(fg);
         Set<String> tot = new HashSet<>();
         for (String fd : reglesProd) {
@@ -131,7 +131,7 @@ public class Grammaire {
      * @param fd ce qui se trouve à droite de la fleche
      * @return les premiers
      */
-    public Set<String> calculerUnPremier(String fg, String fd) {
+    private Set<String> calculerUnPremier(String fg, String fd) {
         Set<String> premiersDejaCalcules = this.premiers.get(fg);
         if (premiersDejaCalcules == null) {
             premiersDejaCalcules = new HashSet<>();
@@ -161,7 +161,7 @@ public class Grammaire {
      * @param fg est ce qui se trouve a gauche de la fleche
      * @return les premiers
      */
-    public Set<String> calculerTousLesPremiersDuneSousProduction(String fg) {
+    private Set<String> calculerTousLesPremiersDuneSousProduction(String fg) {
         List<String> reglesProd = this.reglesProduction.get(fg);
         Set<String> tot = new HashSet<>();
         for (String fd : reglesProd) {
@@ -176,7 +176,7 @@ public class Grammaire {
      * @param fd est ce qui se trouve a droite de la fleche
      * @return les premiers
      */
-    public Set<String> calculerLePremierDUneProduction(String fd) {
+    private Set<String> calculerLePremierDUneProduction(String fd) {
         Set<String> premiersDejaCalcules = new HashSet<>();
 
         String[] splited = fd.split(" ");
@@ -222,7 +222,7 @@ public class Grammaire {
      * @param nT est un non terminal
      * @return les suicants de nt
      */
-    public Set<String> suivant(String nT) {
+    private Set<String> suivant(String nT) {
         Set<String> suivB = this.suivants.get(nT);
         if (suivB == null){
             suivB = new HashSet<>();

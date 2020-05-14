@@ -12,6 +12,11 @@ public class SpecificationSyntaxique {
 
     private Grammaire g;
 
+    /**
+     * Méthode qui lit une grammaire depuis un fichier
+     * @param file est le fichier
+     * @throws FileNotFoundException si le fichier n'est pas trouvé
+     */
     public void lireGrammaire(File file) throws FileNotFoundException {
         this.g = new Grammaire();
         Scanner scFile = new Scanner(file);
@@ -24,12 +29,20 @@ public class SpecificationSyntaxique {
         }
     }
 
+    /**
+     * Méthode qui enregistre la premiere ligne de la grammaire
+     * @param premiereLigne
+     */
     public void enregisterPremiereLigneAxiome(String premiereLigne){
         String NtS= premiereLigne.split("->")[0].trim();
         g.definirAxiomeS(NtS);
         enregisterLigne(premiereLigne);
     }
 
+    /**
+     * Méthode qui enregistre une production
+     * @param ligne est la ligne a enregister
+     */
     public void enregisterLigne(String ligne){
         String[] splitted = ligne.split("->");
         String nonTerminal = splitted[0].trim();
@@ -54,6 +67,9 @@ public class SpecificationSyntaxique {
         this.g = new Grammaire();
     }
 
+    /**
+     * Méthode qui charge la grammaire G'
+     */
     public void loadGPrim(){
         g.ajouterNonTerminal("S","LI","LI'","I","Affectation","Affectation'","While","For","If","ValBool",
                 "BExpression","BExpression'","TBExpression","TBExpression'","FBExpression","GBExpression",
@@ -143,7 +159,7 @@ public class SpecificationSyntaxique {
     }
 
     /**
-     * Calcule les suicants
+     * Calcule les suivants
      */
     public void calculerSuivants(){
         this.g.calculerTousSuivant();
