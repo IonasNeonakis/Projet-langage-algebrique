@@ -145,7 +145,7 @@ public class SpecificationLexicale {
                 }
             }
         }
-        return this.enleverEspaces(remplacement.toString());
+        return this.enleverEspaces(remplacement.toString()).trim();
     }
 
     /**
@@ -160,12 +160,11 @@ public class SpecificationLexicale {
                 .replaceAll("\\*", " * ")
                 .replaceAll("-"," - ")
                 .replaceAll("/"," / ")
-                .replaceAll("%", " % ")
                 .replaceAll("\\[", " [ ")
                 .replaceAll("]", " ] ")
                 .replaceAll("<", " < ")
                 .replaceAll(">", " > ")
-                .replaceAll("==", " == ")
+                .replaceAll("=", " = ")
 
                 .replaceAll("< -","<-")
                 ;
@@ -177,16 +176,18 @@ public class SpecificationLexicale {
      * @return s sans les espaces inutiles
      */
     public String enleverEspaces(String s){
-        return s.replaceAll("\\[ *", "[")
-                .replaceAll(" *; *",";")
-                .replaceAll(" *\\+","+")
-                .replaceAll(" +- *","-")
-                .replaceAll(" *\\* *","*")
-                .replaceAll(" */ *","/")
-                .replaceAll(" *% *","%")
-                .replaceAll(" *\\+ *","+")
+        return s.replaceAll("\\[ *", " [ ")
+                .replaceAll(" *] *"," ] ")
+                .replaceAll(" *; *"," ; ")
+                .replaceAll(" *\\+"," + ")
+                .replaceAll(" +- *"," - ")
+                .replaceAll(" *\\* *"," * ")
+                .replaceAll(" */ *"," / ")
+                .replaceAll(" *\\+ *"," + ")
                 .replaceAll(" *\\. *",".")
-                .replaceAll(" +<-"," <- ");
+                .replaceAll(" +<-"," <- ")
+                .replaceAll("< -","<-");
+
 
                 /* decommenter ça pour enlever les espaces apre_s les bool
                 .replaceAll(" *== *","==")

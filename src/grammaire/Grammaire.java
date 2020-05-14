@@ -87,18 +87,18 @@ public class Grammaire {
     }
 
 
-    public Set<String> calculerLesPremiers(String fg) {
+    public Set<String> calculerTousLesPremiers(String fg) {
         List<String> reglesProd = this.reglesProduction.get(fg);
         Set<String> tot = new HashSet<>();
         for (String fd : reglesProd) {
-            Set<String> calcs = premiersRecUnSeul(fg, fd);
+            Set<String> calcs = calculerUnPremier(fg, fd);
             tot.addAll(calcs);
         }
         this.premiers.put(fg, tot);
         return tot;
     }
 
-    public Set<String> premiersRecUnSeul(String fg, String fd) {
+    public Set<String> calculerUnPremier(String fg, String fd) {
         Set<String> premiersDejaCalcules = this.premiers.get(fg);
         if (premiersDejaCalcules == null) {
             premiersDejaCalcules = new HashSet<>();
@@ -109,7 +109,7 @@ public class Grammaire {
             return premiersDejaCalcules;
         } else if (this.nonTerminaux.contains(splited[0])) {
             for (int i = 0; i < splited.length; i++) {
-                Set<String> premYi = calculerLesPremiers(splited[i]);
+                Set<String> premYi = calculerTousLesPremiers(splited[i]);
                 premiersDejaCalcules.addAll(premYi);
                 if (!premYi.contains("ε")) {
                     return premiersDejaCalcules;
@@ -123,9 +123,44 @@ public class Grammaire {
         }
     }
 
+    public Set<String> calculerTousLesPremiersDuneSousProduction(String fg) {
+        List<String> reglesProd = this.reglesProduction.get(fg);
+        Set<String> tot = new HashSet<>();
+        for (String fd : reglesProd) {
+            Set<String> calcs = calculerLePremierDUneProduction(fd);
+            tot.addAll(calcs);
+        }
+        return tot;
+    }
+
+
+    public Set<String> calculerLePremierDUneProduction(String fd) {
+        Set<String> premiersDejaCalcules = new HashSet<>();
+
+        String[] splited = fd.split(" ");
+        if (this.terminaux.contains(splited[0]) || this.isEpsilon(splited[0])) {
+            premiersDejaCalcules.add(splited[0]);
+            return premiersDejaCalcules;
+        } else if (this.nonTerminaux.contains(splited[0])) {
+            for (int i = 0; i < splited.length; i++) {
+                Set<String> premYi = calculerTousLesPremiersDuneSousProduction(splited[i]);
+                premiersDejaCalcules.addAll(premYi);
+                if (!premYi.contains("ε")) {
+                    return premiersDejaCalcules;
+                }
+            }
+            premiersDejaCalcules.add("ε");
+            return premiersDejaCalcules;
+        } else {
+            System.out.println("Erreur : " + splited[0] + " n'est ni terminal ni non terminal");
+            return null;
+        }
+    }
+
+
     public void calculerTousLesPremiers() {
         for (Map.Entry<String, List<String>> entry : this.reglesProduction.entrySet()) {
-            this.calculerLesPremiers(entry.getKey());
+            this.calculerTousLesPremiers(entry.getKey());
         }
     }
 
@@ -202,40 +237,76 @@ public class Grammaire {
         System.out.println(s);
     }
 
-    public void construireTable(){
+    public void construireTable() {
         for (Map.Entry<String, List<String>> entry : this.reglesProduction.entrySet()) {
             String gA = entry.getKey();
             for (String alpha : entry.getValue()) {
-                Set<String> tousa = this.premiersRecUnSeul(gA, alpha);
-                for (String a : tousa) {
-                    Map<String, String> t2;
-                    if (!this.tableAnalyse.containsKey(gA)) {
-                        t2 = new HashMap<>();
-                    }else{
-                        t2 = this.tableAnalyse.get(gA);
-                    }
-                    t2.put(a, alpha);
-                    this.tableAnalyse.put(gA, t2);
+                Set<String> tousa = this.calculerLePremierDUneProduction(alpha);
+                Map<String, String> t2;
+                if (!this.tableAnalyse.containsKey(gA)) {
+                    t2 = new HashMap<>();
+                } else {
+                    t2 = this.tableAnalyse.get(gA);
                 }
-                if (tousa.contains("ε")){
+                for (String a : tousa) {
+                    if (!a.equals("ε"))
+                        t2.put(a, alpha);
+                }
+                this.tableAnalyse.put(gA, t2);
+                if (tousa.contains("ε")) {
                     for (String b : this.suivants.get(gA)) {
-                        Map<String, String> t2;
-                        if (!this.tableAnalyse.containsKey(gA)) {
-                            t2 = new HashMap<>();
-                        }else{
-                            t2 = this.tableAnalyse.get(gA);
-                        }
-                        t2.put(b,alpha);
-                        this.tableAnalyse.put(gA,t2);
+                        t2.put(b, alpha);
                     }
+                    this.tableAnalyse.put(gA, t2);
                 }
             }
         }
     }
 
+
+
     public void afficherTableProduction(){
         System.out.println(this.tableAnalyse.toString());
     }
+
+    public boolean analyseChaine(String s){
+        Queue<String> pile = Collections.asLifoQueue(new ArrayDeque<>());
+        pile.add("$");
+        pile.add(nonTerminalS);
+
+        String[] Ssplitted = s.split(" ");
+        int i = 0 ;
+        while (i < Ssplitted.length){
+            String tetePile = pile.element();
+            String mot = Ssplitted[i];
+            if (tetePile.equals(mot)){
+                i++;
+                pile.remove();
+            }else{
+                String nouvelleTete;
+                try {
+                    nouvelleTete = this.tableAnalyse.get(tetePile).get(mot); // mettre un try catch qui retourne faux ici
+                }catch (Exception e){
+                    System.out.println("tete de pile :" +tetePile + " mot :" + mot);
+                    //System.out.println(e.getMessage());
+                    return false;
+                }
+                pile.remove();
+                if (nouvelleTete == null){
+                    return false;
+                }
+                if (!nouvelleTete.equals("ε")){
+                    String[] nouvelleTeteSplit = nouvelleTete.split(" ");
+                    for(int j = nouvelleTeteSplit.length -1 ; j >= 0 ; j--){
+                        pile.add(nouvelleTeteSplit[j]);
+                    }
+                }
+            }
+        }
+        return pile.element().equals("$");
+    }
+
+
 
 
 }
