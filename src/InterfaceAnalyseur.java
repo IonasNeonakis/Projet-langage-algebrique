@@ -11,6 +11,9 @@ public class InterfaceAnalyseur {
         this.specificationLexicale = new SpecificationLexicale();
     }
 
+    /**
+     * Méthode pour tapper une grammaire
+     */
     public void demanderDeTapperUneGrammaire() {
         System.out.println("Début de l'analyseur syntaxique");
         String choix ;
@@ -81,13 +84,16 @@ public class InterfaceAnalyseur {
         }
     }
 
+    /**
+     * Méthode pour analyser un fichier
+     */
     public void analyserUnFichier(){
         this.specificationSyntaxique.loadGPrim();
         System.out.println("Début de la vérification");
         String choix ;
         Scanner sc = new Scanner(System.in);
 
-        do {
+        while (true){
             System.out.println("Entez le nom de l'algorithme qui se trouve dans src/programmesAnnexes");
             System.out.println("Fichiers déjà presents : Exemple1, Exemple2, Exemple3, Exemple4, Exemple5, Exemple6");
             System.out.println("Tapez 0 pour sortir");
@@ -104,12 +110,15 @@ public class InterfaceAnalyseur {
                 }
 
             } catch (FileNotFoundException e) {
-                System.out.println("Fichier non trouver, tapez un autre nom");
+                System.out.println("Fichier non trouveé, tapez un autre nom");
             }
 
-        } while (!(choix.equals("1") || choix.equals("2")));
+        }
     }
 
+    /**
+     * Méthode pour lancer l'interface
+     */
     public void demarrer(){
         String choix;
 
