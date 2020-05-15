@@ -50,7 +50,11 @@ public class Grammaire {
      * @param s est un tableau de non terminaux
      */
     public void ajouterNonTerminal(String... s) {
-        this.nonTerminaux.addAll(Arrays.asList(s));
+        for (String s1 : s) {
+            if (!Character.isUpperCase(s1.charAt(0)))
+                throw new RuntimeException("un non terminal doit etre en majuscule");
+            this.nonTerminaux.add(s1);
+        }
     }
 
     /**
@@ -320,7 +324,15 @@ public class Grammaire {
 
 
     public void afficherTableProduction(){
-        System.out.println(this.tableAnalyse.toString());
+        StringBuilder s= new StringBuilder();
+        for (Map.Entry<String, Map<String, String>> entry : this.tableAnalyse.entrySet()) {
+            s.append("Pour ").append(entry.getKey()).append(" : \n");
+            for (Map.Entry<String, String> entry2 : entry.getValue().entrySet()) {
+                s.append(entry2.getKey()).append(" = ").append(entry2.getValue()).append("\n");
+            }
+            s.append("\n --------------------- \n");
+        }
+        System.out.println(s);
     }
 
     /**

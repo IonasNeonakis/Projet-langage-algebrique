@@ -39,9 +39,17 @@ public class InterfaceAnalyseur {
                 break;
             }
         }else {
-            System.out.println("Entez l'axiome S (Sous la forme S -> a | b | c)");
-            choix = sc.nextLine();
-            this.specificationSyntaxique.enregisterPremiereLigneAxiome(choix);
+            while (true) {
+                System.out.println("Entez l'axiome S (Sous la forme S -> a | b | c)");
+                choix = sc.nextLine();
+                try {
+                    this.specificationSyntaxique.enregisterPremiereLigneAxiome(choix);
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Une erreur s'est produite, reesayez");
+                }
+
+            }
             System.out.println("Entre le reste de la grammaire sous forme de regles de productions (A -> S a | b | c R ... )");
             System.out.println("En sepparant chaque terminal et non terminal");
             System.out.println("Tapez sur entrer après chaque production");
@@ -52,7 +60,11 @@ public class InterfaceAnalyseur {
                 if (choix.equals("0"))
                     break;
                 else {
-                    this.specificationSyntaxique.enregisterLigne(choix);
+                    try {
+                        this.specificationSyntaxique.enregisterLigne(choix);
+                    }catch (Exception e){
+                        System.out.println("Une erreur s'est produite, reesayez");
+                    }
                 }
             }
 

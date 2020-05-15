@@ -95,17 +95,6 @@ class SpecificationSyntaxiqueTest {
 
         assertEquals(vraiSuivants,suivants);
 
-        for (Map.Entry<String, Set<String>> entry : suivants.entrySet()) {
-            assertEquals(entry.getValue(),vraiSuivants.get(entry.getKey()));
-
-            if (vraiSuivants.get(entry.getKey()).equals(entry.getValue()))
-                System.out.println(true);
-            else {
-                System.out.println(false);
-                System.out.println(entry.getKey());
-            }
-        }
-
 
 
 
@@ -135,6 +124,8 @@ class SpecificationSyntaxiqueTest {
             colonneS.put("b","ε");
             colonneS.put("$","ε");
             vraiTable.put("S",colonneS);
+
+            g.afficherTableProduction();
 
             assertEquals(vraiTable,tableAnalyse);
 
