@@ -365,9 +365,17 @@ public class Grammaire {
         return pile.element().equals("$");
     }
 
+    public Map<String, Set<String>> getPremiers() {
+        return premiers;
+    }
 
+    public Map<String, Set<String>> getSuivants() {
+        return suivants;
+    }
 
-
+    public Map<String, Map<String, String>> getTableAnalyse() {
+        return tableAnalyse;
+    }
 }
 
 

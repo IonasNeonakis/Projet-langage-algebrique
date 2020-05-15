@@ -2,7 +2,6 @@ import grammaire.Grammaire;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -158,6 +157,7 @@ public class SpecificationSyntaxique {
         this.g.calculerTousLesPremiers();
     }
 
+
     /**
      * Calcule les suivants
      */
@@ -205,5 +205,9 @@ public class SpecificationSyntaxique {
 
     public void afficherTerminaux() {
         g.afficherTerminaux();
+    }
+
+    public Grammaire getG() {
+        return this.g;
     }
 }
