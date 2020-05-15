@@ -1,6 +1,6 @@
 # Projet-langage-algebrique
  
- Pour lancer le projet il suffit de lancer le main et de suivre les instructions
+ Pour l'ancer l'éxécutable il suffit de faire java -jar Projet-langage-algebrique.jar quand vous 
  
  L'éxécutable est celui-là :  out/artifacts/Projet_langage_algebrique_jar/Projet-langage-algebrique.jar
  
