@@ -82,7 +82,7 @@ public class SpecificationSyntaxique {
         g.ajouterRegleProduction("S","program ident begin LI end.");
         g.ajouterRegleProduction("LI","I LI'");
         g.ajouterRegleProduction("LI'","; LI");
-        g.ajouterRegleProduction("LI'","ε");
+        g.ajouterRegleProduction("LI'","epsilon");
 
         g.ajouterRegleProduction("I","Affectation");
         g.ajouterRegleProduction("I","While");
@@ -101,11 +101,11 @@ public class SpecificationSyntaxique {
 
         g.ajouterRegleProduction("BExpression","TBExpression BExpression'");
         g.ajouterRegleProduction("BExpression'","or TBExpression BExpression'");
-        g.ajouterRegleProduction("BExpression'","ε");
+        g.ajouterRegleProduction("BExpression'","epsilon");
 
         g.ajouterRegleProduction("TBExpression","FBExpression TBExpression'");
         g.ajouterRegleProduction("TBExpression'","and FBExpression TBExpression'");
-        g.ajouterRegleProduction("TBExpression'","ε");
+        g.ajouterRegleProduction("TBExpression'","epsilon");
         g.ajouterRegleProduction("FBExpression","not FBExpression");
         g.ajouterRegleProduction("FBExpression","GBExpression");
 
@@ -114,10 +114,10 @@ public class SpecificationSyntaxique {
 
         g.ajouterRegleProduction("Expression","TExpression Expression'");
         g.ajouterRegleProduction("Expression'","OpPasPrio TExpression Expression'");
-        g.ajouterRegleProduction("Expression'","ε");
+        g.ajouterRegleProduction("Expression'","epsilon");
         g.ajouterRegleProduction("TExpression","FExpression TExpression'");
         g.ajouterRegleProduction("TExpression'","OpPrio FExpression TExpression'");
-        g.ajouterRegleProduction("TExpression'","ε");
+        g.ajouterRegleProduction("TExpression'","epsilon");
 
         g.ajouterRegleProduction("FExpression","VarNum");
         g.ajouterRegleProduction("FExpression","( Expression )");
@@ -130,7 +130,7 @@ public class SpecificationSyntaxique {
         g.ajouterRegleProduction("VarNum","ident VarNum'");
         g.ajouterRegleProduction("VarNum","entier");
         g.ajouterRegleProduction("VarNum'","[ Expression ]");
-        g.ajouterRegleProduction("VarNum'","ε");
+        g.ajouterRegleProduction("VarNum'","epsilon");
         g.ajouterRegleProduction("Valeur","ident");
         g.ajouterRegleProduction("Valeur","entier");
 

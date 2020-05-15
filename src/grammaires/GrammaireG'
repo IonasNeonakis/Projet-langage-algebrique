@@ -1,28 +1,28 @@
 S -> program ident begin LI end.
-LI -> I LI’
-LI’ -> ; LI |  ε
+LI -> I LI'
+LI' -> ; LI |  epsilon
 I -> Affectation | While | For | If | break
-Affectation -> ident <- Affectation’
-Affectation’ -> Expression | ValBool
+Affectation -> ident <- Affectation'
+Affectation' -> Expression | ValBool
 While -> while BExpression do LI end
 For -> for ident from Valeur to Valeur do LI end
 If -> if BExpression then LI else LI end
 ValBool -> true | false
-BExpression -> TBExpression BExpression’
-BExpression’ -> or TBExpression BExpression’  | ε
-TBExpression -> FBExpression TBExpression’
-TBExpression’ ->   and FBExpression TBExpression’ | ε
+BExpression -> TBExpression BExpression'
+BExpression' -> or TBExpression BExpression'  | epsilon
+TBExpression -> FBExpression TBExpression'
+TBExpression' ->   and FBExpression TBExpression' | epsilon
 FBExpression -> not FBExpression | GBExpression
 GBExpression -> ValBool | Condition
-Expression -> TExpression Expression’
-Expression’ -> OpPasPrio TExpression Expression’ | ε
-TExpression -> FExpression TExpression’
-TExpression’ -> OpPrio FExpression TExpression’ | ε
+Expression -> TExpression Expression'
+Expression' -> OpPasPrio TExpression Expression' | epsilon
+TExpression -> FExpression TExpression'
+TExpression' -> OpPrio FExpression TExpression' | epsilon
 FExpression -> VarNum | ( Expression )
 OpPrio -> *  | /
 OpPasPrio -> + | -
-VarNum ->ident VarNum’ | entier
-VarNum’ ->  [ Expression ] |   ε
+VarNum ->ident VarNum' | entier
+VarNum' ->  [ Expression ] | epsilon
 Valeur -> ident | entier
 Condition -> Expression OpRel Expression
 OpRel -> <= | < | > | >= | = | ! =

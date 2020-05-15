@@ -41,6 +41,7 @@ public class InterfaceAnalyseur {
         }else {
             while (true) {
                 System.out.println("Entez l'axiome S (Sous la forme S -> a | b | c)");
+                System.out.println("tapez \"epsilon\" pour le mot vide");
                 choix = sc.nextLine();
                 try {
                     this.specificationSyntaxique.enregisterPremiereLigneAxiome(choix);
@@ -51,6 +52,8 @@ public class InterfaceAnalyseur {
 
             }
             System.out.println("Entre le reste de la grammaire sous forme de regles de productions (A -> S a | b | c R ... )");
+            System.out.println("tapez \"epsilon\" pour le mot vide");
+
             System.out.println("En sepparant chaque terminal et non terminal");
             System.out.println("Tapez sur entrer après chaque production");
             System.out.println("Une fois fini tapez sur 0");
@@ -71,6 +74,7 @@ public class InterfaceAnalyseur {
         }
         while (true) {
             do {
+                this.specificationSyntaxique.afficherGrammaire();
                 this.specificationSyntaxique.calculerPremiers();
                 this.specificationSyntaxique.calculerSuivants();
                 this.specificationSyntaxique.calculerTableProduction();

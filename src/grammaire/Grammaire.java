@@ -110,7 +110,7 @@ public class Grammaire {
     }
 
     public boolean isEpsilon(String s) {
-        return s.equals("ε");
+        return s.equals("epsilon");
     }
 
     /**
@@ -148,11 +148,11 @@ public class Grammaire {
             for (int i = 0; i < splited.length; i++) {
                 Set<String> premYi = calculerTousLesPremiers(splited[i]);
                 premiersDejaCalcules.addAll(premYi);
-                if (!premYi.contains("ε")) {
+                if (!premYi.contains("epsilon")) {
                     return premiersDejaCalcules;
                 }
             }
-            premiersDejaCalcules.add("ε");
+            premiersDejaCalcules.add("epsilon");
             return premiersDejaCalcules;
         } else {
             System.out.println("Erreur : " + splited[0] + " n'est ni terminal ni non terminal");
@@ -191,11 +191,11 @@ public class Grammaire {
             for (int i = 0; i < splited.length; i++) {
                 Set<String> premYi = calculerTousLesPremiersDuneSousProduction(splited[i]);
                 premiersDejaCalcules.addAll(premYi);
-                if (!premYi.contains("ε")) {
+                if (!premYi.contains("epsilon")) {
                     return premiersDejaCalcules;
                 }
             }
-            premiersDejaCalcules.add("ε");
+            premiersDejaCalcules.add("epsilon");
             return premiersDejaCalcules;
         } else {
             System.out.println("Erreur : " + splited[0] + " n'est ni terminal ni non terminal");
@@ -242,9 +242,9 @@ public class Grammaire {
                                 suivB.add(splited[i+1]);
                             }else {
                                 Set<String> premierSuivant = new HashSet<>(premiers.get(splited[i + 1]));
-                                premierSuivant.remove("ε");
+                                premierSuivant.remove("epsilon");
                                 suivB.addAll(premierSuivant);
-                                if (this.premiers.get(splited[i+1]).contains("ε")){
+                                if (this.premiers.get(splited[i+1]).contains("epsilon")){
                                     Set<String> suivA = this.suivants.get(entry.getKey());
                                     suivB.addAll(suivA);
                                 }
@@ -307,11 +307,11 @@ public class Grammaire {
                     t2 = this.tableAnalyse.get(gA);
                 }
                 for (String a : tousa) {
-                    if (!a.equals("ε"))
+                    if (!a.equals("epsilon"))
                         t2.put(a, alpha);
                 }
                 this.tableAnalyse.put(gA, t2);
-                if (tousa.contains("ε")) {
+                if (tousa.contains("epsilon")) {
                     for (String b : this.suivants.get(gA)) {
                         t2.put(b, alpha);
                     }
@@ -366,7 +366,7 @@ public class Grammaire {
                 if (nouvelleTete == null){
                     return false;
                 }
-                if (!nouvelleTete.equals("ε")){
+                if (!nouvelleTete.equals("epsilon")){
                     String[] nouvelleTeteSplit = nouvelleTete.split(" ");
                     for(int j = nouvelleTeteSplit.length -1 ; j >= 0 ; j--){
                         pile.add(nouvelleTeteSplit[j]);

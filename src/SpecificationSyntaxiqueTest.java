@@ -20,7 +20,7 @@ class SpecificationSyntaxiqueTest {
         Map<String, Set<String>> prems = g.getPremiers();
         Map<String, Set<String>> vraiPrems = new HashMap<>();
 
-        vraiPrems.put("Expression'",new HashSet<>(Arrays.asList("+","-","ε")));
+        vraiPrems.put("Expression'",new HashSet<>(Arrays.asList("+","-","epsilon")));
         vraiPrems.put("Affectation'",new HashSet<>(Arrays.asList("ident", "entier", "(", "true", "false")));
         vraiPrems.put("I",new HashSet<>(Arrays.asList("break", "ident", "for", "while", "if")));
         vraiPrems.put("S",new HashSet<>(Arrays.asList("program")));
@@ -28,25 +28,25 @@ class SpecificationSyntaxiqueTest {
         vraiPrems.put("OpRel",new HashSet<>(Arrays.asList("<=", "!=", "<", "=", ">", ">=")));
         vraiPrems.put("OpPrio",new HashSet<>(Arrays.asList("*", "/")));
         vraiPrems.put("Affectation",new HashSet<>(Arrays.asList("ident")));
-        vraiPrems.put("TBExpression'",new HashSet<>(Arrays.asList("ε", "and")));
+        vraiPrems.put("TBExpression'",new HashSet<>(Arrays.asList("epsilon", "and")));
         vraiPrems.put("GBExpression",new HashSet<>(Arrays.asList("ident", "entier", "true", "false", "(")));
         vraiPrems.put("Condition",new HashSet<>(Arrays.asList("ident", "entier", "(")));
         vraiPrems.put("FBExpression",new HashSet<>(Arrays.asList("not", "ident", "entier", "true", "false", "(")));
         vraiPrems.put("ValBool",new HashSet<>(Arrays.asList("true","false")));
-        vraiPrems.put("TExpression'",new HashSet<>(Arrays.asList("*", "/", "ε")));
+        vraiPrems.put("TExpression'",new HashSet<>(Arrays.asList("*", "/", "epsilon")));
         vraiPrems.put("For",new HashSet<>(Arrays.asList("for")));
         vraiPrems.put("While",new HashSet<>(Arrays.asList("while")));
         vraiPrems.put("TBExpression",new HashSet<>(Arrays.asList("not", "ident", "entier", "true", "false", "(")));
         vraiPrems.put("Valeur",new HashSet<>(Arrays.asList("ident", "entier")));
-        vraiPrems.put("BExpression'",new HashSet<>(Arrays.asList("or", "ε")));
+        vraiPrems.put("BExpression'",new HashSet<>(Arrays.asList("or", "epsilon")));
         vraiPrems.put("VarNum",new HashSet<>(Arrays.asList("ident", "entier")));
-        vraiPrems.put("VarNum'",new HashSet<>(Arrays.asList("ε", "[")));
+        vraiPrems.put("VarNum'",new HashSet<>(Arrays.asList("epsilon", "[")));
         vraiPrems.put("Expression",new HashSet<>(Arrays.asList("ident", "entier", "(")));
         vraiPrems.put("BExpression",new HashSet<>(Arrays.asList("not", "ident", "entier", "true", "false", "(")));
         vraiPrems.put("OpPasPrio",new HashSet<>(Arrays.asList("+", "-")));
         vraiPrems.put("If",new HashSet<>(Arrays.asList("if")));
         vraiPrems.put("LI",new HashSet<>(Arrays.asList("break", "ident", "for", "while", "if")));
-        vraiPrems.put("LI'",new HashSet<>(Arrays.asList("ε", ";")));
+        vraiPrems.put("LI'",new HashSet<>(Arrays.asList("epsilon", ";")));
         vraiPrems.put("FExpression",new HashSet<>(Arrays.asList("ident", "entier", "(")));
 
         assertEquals(prems,vraiPrems);
@@ -115,14 +115,14 @@ class SpecificationSyntaxiqueTest {
 
             Map<String,String> colonneA = new HashMap<>();
             colonneA.put("a","a S b b");
-            colonneA.put("b","ε");
-            colonneA.put("$","ε");
+            colonneA.put("b","epsilon");
+            colonneA.put("$","epsilon");
             vraiTable.put("A",colonneA);
             Map<String,String> colonneS = new HashMap<>();
 
             colonneS.put("a","a A");
-            colonneS.put("b","ε");
-            colonneS.put("$","ε");
+            colonneS.put("b","epsilon");
+            colonneS.put("$","epsilon");
             vraiTable.put("S",colonneS);
 
             g.afficherTableProduction();
