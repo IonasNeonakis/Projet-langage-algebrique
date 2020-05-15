@@ -74,17 +74,20 @@ public class InterfaceAnalyseur {
         }
         while (true) {
             do {
-                this.specificationSyntaxique.afficherGrammaire();
                 this.specificationSyntaxique.calculerPremiers();
                 this.specificationSyntaxique.calculerSuivants();
                 this.specificationSyntaxique.calculerTableProduction();
+                System.out.println("Tapez 0 pour afficher la grammaire");
                 System.out.println("Tapez 1 pour afficher les premiers");
                 System.out.println("Tapez 2 pour afficher les suivants");
                 System.out.println("Tapez 3 pour afficher la table de production");
                 System.out.println("Tapez 4 pour quitter");
                 choix = sc.nextLine();
-            } while (!(choix.equals("1") || choix.equals("2") || choix.equals("3") || choix.equals("4")));
+            } while (!(choix.equals("1") || choix.equals("2") || choix.equals("3") || choix.equals("0") || choix.equals("4")));
             switch (choix) {
+                case "0":
+                    this.specificationSyntaxique.afficherGrammaire();
+                    break;
                 case "1":
                     this.specificationSyntaxique.afficherPremiers();
                     break;
